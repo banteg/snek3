@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "eth-api-spec"
+version = "0.1.0"
+description = "msgspec definitions of ethereum execution client json-rpc api"
+authors = ["banteg <banteg@pm.me>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+msgspec = "^0.7.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
