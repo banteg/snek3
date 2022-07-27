@@ -1,6 +1,6 @@
 from typing import Type, Any
 from hexbytes import HexBytes
-from eth_api_spec.types.base import uint, bytes256, address, hash32, bytes8
+from snek3.types.base import uint, bytes256, address, hash32, bytes8
 from eth_utils import to_checksum_address
 
 

@@ -1,10 +1,10 @@
 from hexbytes import HexBytes
 from eth_utils import encode_hex
 import re
-from eth_api_spec.rpc.method import Method
-from eth_api_spec.types.block import BlockShort, BlockExpanded
+from snek3.rpc.method import Method
+from snek3.types.block import BlockShort, BlockExpanded
 from msgspec.json import Decoder
-from eth_api_spec.hooks import dec_hook
+from snek3.hooks import dec_hook
 
 
 class GetBlock(Method):

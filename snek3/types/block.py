@@ -3,8 +3,8 @@ from hexbytes import HexBytes
 
 from msgspec import Struct
 
-from eth_api_spec.types.base import address, bytes8, bytes256, hash32, uint
-from eth_api_spec.types.transaction import Transaction
+from snek3.types.base import address, bytes8, bytes256, hash32, uint
+from snek3.types.transaction import Transaction
 
 
 class Block(Struct, rename="camel"):

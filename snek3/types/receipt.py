@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from msgspec import Struct
 
-from eth_api_spec.types.base import address, bytes256, bytes32, hash32, uint
+from snek3.types.base import address, bytes256, bytes32, hash32, uint
 
 
 class Log(Struct, rename="camel"):

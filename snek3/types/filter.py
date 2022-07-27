@@ -4,7 +4,7 @@ from typing import List, Literal, Optional
 
 from msgspec import Struct
 
-from eth_api_spec.types import address, bytes32, hash32, uint
+from snek3.types.__init__2 import address, bytes32, hash32, uint, Log
 
 FilterResults = List[hash32] | List[Log]
 

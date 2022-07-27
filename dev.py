@@ -1,13 +1,13 @@
 from typing import Dict, Optional
 import httpx
-from eth_api_spec.types.block import BlockShort, BlockExpanded
-from eth_api_spec.types import rpc
-from eth_api_spec.hooks import dec_hook
+from snek3.types.block import BlockShort, BlockExpanded
+from snek3.types import rpc
+from snek3.hooks import dec_hook
 from msgspec.json import Decoder, Encoder
 from msgspec import Struct, Raw
 from typer import Typer
 from devtools import debug
-from eth_api_spec.rpc.base import Snek3
+from snek3.rpc.base import Snek3
 
 RPC_URL = "http://127.0.0.1:8545"
 

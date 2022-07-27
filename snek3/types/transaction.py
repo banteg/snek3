@@ -3,7 +3,7 @@ from typing import List, Optional
 from hexbytes import HexBytes
 from msgspec import Struct
 
-from eth_api_spec.types.base import address, hash32, uint
+from snek3.types.base import address, hash32, uint
 
 transaction_rename = {
     "sender": "from",  # the culprit

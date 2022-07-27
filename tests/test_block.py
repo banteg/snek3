@@ -1,7 +1,7 @@
 import pytest
 from hexbytes import HexBytes
 
-from eth_api_spec.methods.block import GetBlock
+from snek3.methods.block import GetBlock
 
 block_number = 15_000_000
 block_hash = "0x" + "".zfill(64)

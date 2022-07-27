@@ -4,9 +4,9 @@ import httpx
 from msgspec import Raw
 from msgspec.json import Decoder
 
-from eth_api_spec.rpc.exceptions import RPCError
-from eth_api_spec.types.rpc import Response
-from eth_api_spec.methods.block import GetBlock
+from snek3.rpc.exceptions import RPCError
+from snek3.types.rpc import Response
+from snek3.methods.block import GetBlock
 
 method_handlers = {
     "get_block": GetBlock,

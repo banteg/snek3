@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "eth-api-spec"
+name = "snek3"
 version = "0.1.0"
-description = "msgspec definitions of ethereum execution client json-rpc api"
+description = "msgspec definitions of ethereum execution client api"
 authors = ["banteg <banteg@pm.me>"]
 license = "MIT"
 

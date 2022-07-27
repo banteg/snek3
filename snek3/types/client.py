@@ -2,7 +2,7 @@ from typing import Literal
 
 from msgspec import Struct
 
-from eth_api_spec.types import uint
+from snek3.types.__init__2 import uint
 
 
 class SyncingProgress(Struct, rename="camel"):
