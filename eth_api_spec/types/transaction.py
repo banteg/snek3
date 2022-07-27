@@ -17,7 +17,6 @@ transaction_rename = {
     "max_priority_fee_per_gas": "maxPriorityFeePerGas",
     "access_list": "accessList",
     "gas_price": "gasPrice",
-    "y_parity": "yParity",
     "v": "v",
     "r": "r",
     "s": "s",
