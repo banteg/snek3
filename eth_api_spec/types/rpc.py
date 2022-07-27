@@ -12,7 +12,7 @@ class Error(Struct):
 
 
 class Response(Struct):
-    result: Optional[Raw] = None
+    result: Raw = None  # type: ignore
     error: Optional[Error] = None
     id: Optional[str | int] = None
     jsonrpc: Literal["2.0"] = "2.0"
