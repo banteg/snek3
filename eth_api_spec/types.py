@@ -21,6 +21,10 @@ class bytes256(HexBytes):
     pass
 
 
+class bytes32(HexBytes):
+    pass
+
+
 class bytes8(HexBytes):
     pass
 
