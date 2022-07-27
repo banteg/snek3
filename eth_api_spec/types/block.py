@@ -24,7 +24,6 @@ class Block(Struct, rename="camel"):
     nonce: bytes8
     size: uint
     uncles: List[hash32]
-    transactions: List[hash32] | List[Transaction]
 
 
 class BlockShort(Block):
