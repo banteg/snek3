@@ -1,3 +1,5 @@
+from functools import partial
+
 import httpx
 from msgspec import Raw
 from msgspec.json import Decoder
@@ -18,3 +20,13 @@ class Snek3:
             raise RPCError(data.error.message)
 
         return data.result
+
+    def __getattr__(self, method):
+        return partial(self.call_method, method)
+
+    def call_method(self, method, *params):
+        print(method, params)
+        # validate and convert params
+        method, params = self.encode_payload(method, *params)
+
+    def encode_payload(self, method, *params):
