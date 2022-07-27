@@ -1,3 +1,4 @@
+from abc import abstractmethod, ABCMeta
 from typing import List, Tuple
 
 
@@ -6,14 +7,16 @@ class IdentityDecoder:
         return data
 
 
-class Method:
+class Method(metaclass=ABCMeta):
+
     decoder = IdentityDecoder()
 
-    def __init__(self, method, params):
-        self.method, self.params = self.encode_payload(method, params)
+    def __init__(self, *args, **kwargs):
+        self.method, self.params = self.encode_payload(*args, **kwargs)
 
+    @abstractmethod
     def encode_payload(self, *args, **kwargs) -> Tuple[str, List]:
-        return self.method, self.params
+        pass
 
     def decode_response(self, data: bytearray):
         return self.decoder.decode(data)

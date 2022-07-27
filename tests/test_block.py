@@ -1,7 +1,7 @@
 import pytest
 from hexbytes import HexBytes
 
-from eth_api_spec.eth.block import get_block
+from eth_api_spec.methods.block import GetBlock
 
 block_number = 15_000_000
 block_hash = "0x" + "".zfill(64)
@@ -17,10 +17,11 @@ block_cases = {
 
 @pytest.mark.parametrize("identifier", block_cases)
 def test_encode_get_block_payload(identifier):
-    assert get_block(identifier) == block_cases[identifier]
+    handler = GetBlock(identifier)
+    assert handler.method, handler.params == block_cases[identifier]
 
 
 @pytest.mark.parametrize("identifier", ["bunny", -1])
 def test_encode_get_block_payload_fail(identifier):
     with pytest.raises(ValueError):
-        get_block(identifier)
+        GetBlock(identifier)
