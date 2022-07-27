@@ -3,10 +3,11 @@ from hexbytes import HexBytes
 
 from eth_api_spec.eth.block import get_block
 
-block_hash = "0x6b5cfb96ddfe26113edf9e75076c5527f70cae6ad6164493e96e1e5c79ba42ba"
+block_number = 15_000_000
+block_hash = "0x" + "".zfill(64)
 block_cases = {
-    15_000_000: ("eth_getBlockByNumber", [hex(15_000_000), False]),
-    hex(15_000_000): ("eth_getBlockByNumber", [hex(15_000_000), False]),
+    block_number: ("eth_getBlockByNumber", [hex(block_number), False]),
+    hex(block_number): ("eth_getBlockByNumber", [hex(block_number), False]),
     "pending": ("eth_getBlockByHash", ["pending", False]),
     block_hash: ("eth_getBlockByHash", [block_hash, False]),
     bytes.fromhex(block_hash[2:]): ("eth_getBlockByHash", [block_hash, False]),
@@ -19,6 +20,7 @@ def test_encode_get_block_payload(identifier):
     assert get_block(identifier) == block_cases[identifier]
 
 
-def test_encode_get_block_payload_fail():
+@pytest.mark.parametrize("identifier", ["bunny", -1])
+def test_encode_get_block_payload_fail(identifier):
     with pytest.raises(ValueError):
-        get_block("bunny")
+        get_block(identifier)

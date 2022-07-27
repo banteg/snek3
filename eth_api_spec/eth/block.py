@@ -8,7 +8,7 @@ def get_block(identifier: int | str | bytes, with_transactions: bool = False):
 
     match identifier:
         # block number as int
-        case int():
+        case int() as i if i >= 0:
             method = "eth_getBlockByNumber"
             params = [hex(identifier), with_transactions]
         # block tag
