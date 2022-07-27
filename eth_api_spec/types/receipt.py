@@ -2,20 +2,19 @@ from typing import List, Optional
 
 from msgspec import Struct
 
-from eth_api_spec.types import address, bytes256, bytes32, hash32, uint
+from eth_api_spec.types.base import address, bytes256, bytes32, hash32, uint
 
 
 class Log(Struct, rename="camel"):
-    transaction_hash: hash32
     removed: Optional[bool]
     log_index: Optional[uint]
     transaction_index: Optional[uint]
-    transaction_hash: Optional[hash32]
+    transaction_hash: hash32
     block_hash: Optional[hash32]
     block_number: Optional[uint]
     address: Optional[address]
     data: Optional[bytes]
-    topics: Optional[List][bytes32]
+    topics: Optional[List[bytes32]]
 
 
 receipt_rename = {
@@ -23,7 +22,7 @@ receipt_rename = {
     "transaction_index": "transactionIndex",
     "block_hash": "blockHash",
     "block_number": "blockNumber",
-    "sender": "from",
+    "sender": "from",  # the culprit
     "to": "to",
     "cumulative_gas_used": "cumulativeGasUsed",
     "gas_used": "gasUsed",
