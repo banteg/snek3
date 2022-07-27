@@ -6,6 +6,11 @@ from msgspec.json import Decoder
 
 from eth_api_spec.rpc.exceptions import RPCError
 from eth_api_spec.types.rpc import Response
+from eth_api_spec.methods.block import GetBlock
+
+method_handlers = {
+    "get_block": GetBlock,
+}
 
 
 class Snek3:
@@ -24,9 +29,8 @@ class Snek3:
     def __getattr__(self, method):
         return partial(self.call_method, method)
 
-    def call_method(self, method, *params):
-        print(method, params)
-        # validate and convert params
-        method, params = self.encode_payload(method, *params)
-
-    def encode_payload(self, method, *params):
+    def call_method(self, method, *args, **kwargs):
+        print(method, args, **kwargs)
+        handler = method_handlers[method](*args, **kwargs)
+        result = self.make_request(handler.method, handler.params)
+        return handler.decode_response(result)
