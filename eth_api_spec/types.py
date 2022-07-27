@@ -9,6 +9,10 @@ class uint(int):
     pass
 
 
+class uint64(int):
+    pass
+
+
 class uint256(int):
     pass
 
