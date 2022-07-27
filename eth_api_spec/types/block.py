@@ -1,9 +1,10 @@
-from typing import List, Literal
+from typing import Dict, List, Literal
+from hexbytes import HexBytes
 
 from msgspec import Struct
 
-from eth_api_spec.transaction import TransactionSigned
-from eth_api_spec.types import address, bytes8, bytes256, hash32, uint
+from eth_api_spec.types.base import address, bytes8, bytes256, hash32, uint
+from eth_api_spec.types.transaction import Transaction
 
 
 class Block(Struct, rename="camel"):
@@ -18,12 +19,20 @@ class Block(Struct, rename="camel"):
     gas_limit: uint
     gas_used: uint
     timestamp: uint
-    extra_data: bytes
+    extra_data: HexBytes
     mix_hash: hash32
     nonce: bytes8
     size: uint
-    transactions: hash32 | List[TransactionSigned]
     uncles: List[hash32]
+    transactions: List[hash32] | List[Transaction]
+
+
+class BlockShort(Block):
+    transactions: List[hash32]
+
+
+class BlockExpanded(Block):
+    transactions: List[Transaction]
 
 
 BlockTag = Literal["earliest", "finalized", "safe", "latest", "pending"]

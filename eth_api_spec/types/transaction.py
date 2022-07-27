@@ -6,8 +6,17 @@ from msgspec import Struct
 from eth_api_spec.types.base import address, byte, hash32, uint
 
 
+class AccessListEntry(Struct, rename="camel"):
+    address: address
+    storage_keys: List[hash32]
+
+
+AccessList = List[AccessListEntry]
+
+# field renames
+
 transaction_rename = {
-    "type": "type",
+    "type": "type",  # reserved keyword
     "nonce": "nonce",
     "sender": "from",  # the culprit
     "to": "to",
@@ -31,32 +40,42 @@ transaction_rename = {
 }
 
 
-class AccessListEntry(Struct, rename="camel"):
-    address: address
-    storage_keys: List[hash32]
+class TransactionBase(Struct, rename=transaction_rename.get):
+    # `type` field is omitted since it's used in the tagged union
 
-
-AccessList = List[AccessListEntry]
-
-
-class TransactionInfo(Struct, rename=transaction_rename.get):
-    type: uint
     nonce: uint
-    sender: address
     to: Optional[address]
     gas: uint
     value: uint
     input: HexBytes
+    chain_id: Optional[uint]
+
+    # details
     block_hash: hash32
     block_number: uint
+    sender: address
     hash: hash32
     transaction_index: uint
+
+    # signature
+    v: uint
     r: uint
     s: uint
-    max_fee_per_gas: Optional[uint] = None
-    max_priority_fee_per_gas: Optional[uint] = None
+
+
+class Transaction1559(TransactionBase, tag="0x2"):
+    max_fee_per_gas: uint
+    max_priority_fee_per_gas: uint
     access_list: Optional[AccessList] = None
-    gas_price: Optional[uint] = None
-    y_parity: Optional[uint] = None
-    v: Optional[uint] = None
-    chain_id: Optional[uint] = None
+
+
+class Transaction2930(TransactionBase, tag="0x1"):
+    gas_price: uint
+    access_list: Optional[AccessList] = None
+
+
+class TransactionLegacy(TransactionBase, tag="0x0"):
+    gas_price: uint
+
+
+Transaction = Transaction1559 | Transaction2930 | TransactionLegacy
