@@ -1,22 +1,11 @@
 from typing import List, Optional
-from hexbytes import HexBytes
 
+from hexbytes import HexBytes
 from msgspec import Struct
 
-from eth_api_spec.types.base import address, byte, hash32, uint
-
-
-class AccessListEntry(Struct, rename="camel"):
-    address: address
-    storage_keys: List[hash32]
-
-
-AccessList = List[AccessListEntry]
-
-# field renames
+from eth_api_spec.types.base import address, hash32, uint
 
 transaction_rename = {
-    "type": "type",  # reserved keyword
     "nonce": "nonce",
     "sender": "from",  # the culprit
     "to": "to",
@@ -38,6 +27,14 @@ transaction_rename = {
     "hash": "hash",
     "transaction_index": "transactionIndex",
 }
+
+
+class AccessListEntry(Struct, rename="camel"):
+    address: address
+    storage_keys: List[hash32]
+
+
+AccessList = List[AccessListEntry]
 
 
 class TransactionBase(Struct, rename=transaction_rename.get):
