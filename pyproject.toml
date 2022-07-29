@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-msgspec = "^0.7.1"
+msgspec = { git = "https://github.com/jcrist/msgspec.git", branch = "main" }
 hexbytes = "^0.2.2"
 
 [tool.poetry.dev-dependencies]
