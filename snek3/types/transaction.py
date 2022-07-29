@@ -1,9 +1,8 @@
 from typing import List, Optional
 
-from hexbytes import HexBytes
 from msgspec import Struct
 
-from snek3.types.base import address, hash32, uint
+from snek3.types.base import address, hash32, uint, bytesn
 
 transaction_rename = {
     "sender": "from",  # the culprit
@@ -34,7 +33,7 @@ class TransactionBase(Struct, rename=rename_fn):
     to: Optional[address]
     gas: uint
     value: uint
-    input: HexBytes
+    input: bytesn
     chain_id: Optional[uint]
 
     # details

@@ -3,7 +3,7 @@ from hexbytes import HexBytes
 
 from msgspec import Struct
 
-from snek3.types.base import address, bytes8, bytes256, hash32, uint
+from snek3.types.base import address, bytes8, bytes256, hash32, uint, bytesn
 from snek3.types.transaction import Transaction
 
 
@@ -19,7 +19,7 @@ class Block(Struct, rename="camel"):
     gas_limit: uint
     gas_used: uint
     timestamp: uint
-    extra_data: HexBytes
+    extra_data: bytesn
     mix_hash: hash32
     nonce: bytes8
     size: uint

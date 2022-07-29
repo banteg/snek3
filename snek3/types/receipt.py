@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from msgspec import Struct
 
-from snek3.types.base import address, bytes256, bytes32, hash32, uint
+from snek3.types.base import address, bytes256, bytes32, hash32, uint, bytesn
 
 
 class Log(Struct, rename="camel"):
@@ -13,7 +13,7 @@ class Log(Struct, rename="camel"):
     block_hash: Optional[hash32]
     block_number: Optional[uint]
     address: Optional[address]
-    data: Optional[bytes]
+    data: Optional[bytesn]
     topics: Optional[List[bytes32]]
 
 

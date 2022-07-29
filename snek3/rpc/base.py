@@ -7,9 +7,11 @@ from msgspec.json import Decoder
 from snek3.rpc.exceptions import RPCError
 from snek3.types.rpc import Response
 from snek3.methods.block import GetBlock
+from snek3.methods.logs import GetLogs
 
 method_handlers = {
     "get_block": GetBlock,
+    "get_logs": GetLogs,
 }
 
 
