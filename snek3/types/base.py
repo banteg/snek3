@@ -17,19 +17,23 @@ class uint256(int):
     pass
 
 
-class hash32(HexBytes):
+class bytesn(bytes):
     pass
 
 
-class bytes256(HexBytes):
+class hash32(bytes):
     pass
 
 
-class bytes32(HexBytes):
+class bytes256(bytes):
     pass
 
 
-class bytes8(HexBytes):
+class bytes32(bytes):
+    pass
+
+
+class bytes8(bytes):
     pass
 
 
