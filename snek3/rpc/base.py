@@ -1,3 +1,4 @@
+from typing import Any
 import httpx
 from msgspec import Raw
 from msgspec.json import Decoder
@@ -21,6 +22,6 @@ class RPC:
 
         return data.result
 
-    def make_request(self, method, params, response_type=None):
+    def make_request(self, method, params, response_type=Any):
         result = self.raw_request(method, params)
         return Decoder(response_type, dec_hook=dec_hook).decode(result)
