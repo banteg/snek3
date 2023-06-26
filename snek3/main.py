@@ -7,7 +7,8 @@ from snek3.rpc.base import RPC
 from snek3.types.base import bytesn, uint
 from snek3.types.block import BlockExpanded, BlockShort
 from snek3.types.filter import FilterResults
-from snek3.types.transaction import GenericTransaction
+from snek3.types.receipt import ReceiptInfo
+from snek3.types.transaction import GenericTransaction, Transaction
 
 
 class Snek3(RPC):
@@ -70,3 +71,17 @@ class Snek3(RPC):
             }
         ]
         return self.make_request("eth_getLogs", params, FilterResults)
+
+    def get_storage_at(self, account, slot, block_id='latest'):
+        if isinstance(slot, int):
+            slot = hex(slot)
+        return self.make_request("eth_getStorageAt", [account, slot, block_id], bytesn)
+
+    def get_transaction(self, hash):
+        return self.make_request("eth_getTransactionByHash", [hash], Transaction)
+
+    def get_nonce(self, account, block='latest'):
+        return self.make_request("eth_getTransactionCount", [account, block], uint)
+
+    def get_receipt(self, hash):
+        return self.make_request("eth_getTransactionReceipt", [hash], ReceiptInfo)
