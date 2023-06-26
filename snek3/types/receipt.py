@@ -23,30 +23,25 @@ receipt_rename = {
     "block_hash": "blockHash",
     "block_number": "blockNumber",
     "sender": "from",  # the culprit
-    "to": "to",
     "cumulative_gas_used": "cumulativeGasUsed",
     "gas_used": "gasUsed",
     "contract_address": "contractAddress",
-    "logs": "logs",
     "logs_bloom": "logsBloom",
-    "root": "root",
-    "status": "status",
     "effective_gas_price": "effectiveGasPrice",
 }
 
 
-class ReceiptInfo(Struct, rename=receipt_rename.get):
+class ReceiptInfo(Struct, rename=lambda item: receipt_rename.get(item, item)):
     transaction_hash: hash32
     transaction_index: uint
     block_hash: hash32
     block_number: uint
     sender: address
-    to: Optional[address]
+    to: address | None
     cumulative_gas_used: uint
     gas_used: uint
-    contract_address: Optional[address]
+    contract_address: address | None
     logs: List[Log]
     logs_bloom: bytes256
-    root: Optional[bytes32]
     status: uint
     effective_gas_price: uint
