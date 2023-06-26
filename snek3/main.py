@@ -61,20 +61,10 @@ class Snek3(RPC):
     def get_code(self, account, block_id="latest"):
         return self.make_request("eth_getCode", [account, block_id], bytesn)
 
-    def get_logs(self, address=None, topics=None, from_block=None, to_block=None):
-        params = [
-            {
-                "address": address,
-                "topics": topics,
-                "fromBlock": hex(from_block),
-                "toBlock": hex(to_block),
-            }
-        ]
+    def get_logs(self, params):
         return self.make_request("eth_getLogs", params, FilterResults)
 
     def get_storage_at(self, account, slot, block_id='latest'):
-        if isinstance(slot, int):
-            slot = hex(slot)
         return self.make_request("eth_getStorageAt", [account, slot, block_id], bytesn)
 
     def get_transaction(self, hash):
@@ -85,3 +75,7 @@ class Snek3(RPC):
 
     def get_receipt(self, hash):
         return self.make_request("eth_getTransactionReceipt", [hash], Receipt)
+
+    @property
+    def client_version(self):
+        return self.make_request("web3_clientVersion", [])
