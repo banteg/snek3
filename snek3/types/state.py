@@ -4,7 +4,7 @@ from typing import List
 
 from msgspec import Struct
 
-from snek3.types.__init__2 import address, hash32, uint64, uint256
+from snek3.types.base import address, hash32, uint64, uint256
 
 
 class AccountProof(Struct, rename="camel"):

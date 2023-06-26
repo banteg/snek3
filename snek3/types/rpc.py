@@ -1,6 +1,6 @@
 # https://www.jsonrpc.org/specification
 
-from typing import Any, Literal, Optional
+from typing import Any, List, Literal, Optional
 
 from msgspec import Raw, Struct
 

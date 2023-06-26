@@ -1,5 +1,4 @@
-from typing import Dict, List, Literal
-from hexbytes import HexBytes
+from typing import List, Literal
 
 from msgspec import Struct
 

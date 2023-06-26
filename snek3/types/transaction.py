@@ -15,7 +15,6 @@ transaction_rename = {
     "block_number": "blockNumber",
     "transaction_index": "transactionIndex",
 }
-rename_fn = lambda item: transaction_rename.get(item, item)
 
 
 class AccessListEntry(Struct, rename="camel"):
@@ -26,7 +25,7 @@ class AccessListEntry(Struct, rename="camel"):
 AccessList = List[AccessListEntry]
 
 
-class TransactionBase(Struct, rename=rename_fn):
+class TransactionBase(Struct, rename=lambda item: transaction_rename.get(item, item)):
     # `type` field is omitted since it's used in the tagged union
 
     nonce: uint
