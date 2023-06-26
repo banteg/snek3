@@ -1,10 +1,13 @@
-from snek3.rpc.base import RPC
-from snek3.types.base import uint, bytesn
-from snek3.types.transaction import GenericTransaction
-from hexbytes import HexBytes
-from eth_utils import encode_hex
-from snek3.types.block import BlockExpanded, BlockShort
 import re
+
+from eth_utils import encode_hex
+from hexbytes import HexBytes
+
+from snek3.rpc.base import RPC
+from snek3.types.base import bytesn, uint
+from snek3.types.block import BlockExpanded, BlockShort
+from snek3.types.filter import FilterResults
+from snek3.types.transaction import GenericTransaction
 
 
 class Snek3(RPC):
@@ -23,8 +26,8 @@ class Snek3(RPC):
     def chain_id(self):
         return self.make_request("eth_chainId", [], uint)
 
-    def get_balance(self, account, block="latest"):
-        return self.make_request("eth_getBalance", [account, block], uint)
+    def get_balance(self, account, block_id="latest"):
+        return self.make_request("eth_getBalance", [account, block_id], uint)
 
     def get_block(self, identifier, with_transactions=False):
         method = "eth_getBlockByHash"
@@ -53,3 +56,17 @@ class Snek3(RPC):
 
         response_type = BlockExpanded if with_transactions else BlockShort
         return self.make_request(method, params, response_type)
+
+    def get_code(self, account, block_id="latest"):
+        return self.make_request("eth_getCode", [account, block_id], bytesn)
+
+    def get_logs(self, address=None, topics=None, from_block=None, to_block=None):
+        params = [
+            {
+                "address": address,
+                "topics": topics,
+                "fromBlock": hex(from_block),
+                "toBlock": hex(to_block),
+            }
+        ]
+        return self.make_request("eth_getLogs", params, FilterResults)
