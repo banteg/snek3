@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from msgspec import Struct
+from typing import TypedDict
 
 from snek3.types.base import address, hash32, uint, bytesn
 
@@ -64,3 +65,23 @@ class TransactionLegacy(TransactionBase, tag="0x0"):
 
 
 Transaction = Transaction1559 | Transaction2930 | TransactionLegacy
+
+# used as input
+GenericTransaction = TypedDict(
+    "GenericTransaction",
+    {
+        "type": bytesn,
+        "nonce": uint,
+        "to": address,
+        "from": address,
+        "gas": uint,
+        "value": uint,
+        "input": bytesn,
+        "gasPrice": uint,
+        "maxPriorityFeePerGas": uint,
+        "maxFeePerGas": uint,
+        "accessList": AccessList,
+        "chainId": uint,
+    },
+    total=False,
+)
