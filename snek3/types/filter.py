@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from msgspec import Struct
 
-from snek3.types.base import address, bytes32, hash32, uint
+from snek3.types.base import address, bytes32, uint
 from snek3.types.receipt import Log
 
 FilterResults = List[Log]
