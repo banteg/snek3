@@ -1,6 +1,6 @@
 from typing import List
 
-from msgspec import Struct
+from msgspec import Struct, field
 
 from snek3.types.base import address, bytes256, bytes32, hash32, uint, bytesn
 
@@ -17,26 +17,12 @@ class Log(Struct, rename="camel"):
     topics: List[bytes32] | None
 
 
-receipt_rename = {
-    "transaction_hash": "transactionHash",
-    "transaction_index": "transactionIndex",
-    "block_hash": "blockHash",
-    "block_number": "blockNumber",
-    "sender": "from",  # the culprit
-    "cumulative_gas_used": "cumulativeGasUsed",
-    "gas_used": "gasUsed",
-    "contract_address": "contractAddress",
-    "logs_bloom": "logsBloom",
-    "effective_gas_price": "effectiveGasPrice",
-}
-
-
-class Receipt(Struct, rename=receipt_rename.get):
+class Receipt(Struct, rename="camel"):
     transaction_hash: hash32
     transaction_index: uint
     block_hash: hash32
     block_number: uint
-    sender: address
+    sender: address = field(name="from")
     to: address | None
     cumulative_gas_used: uint
     gas_used: uint

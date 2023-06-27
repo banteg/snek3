@@ -1,21 +1,8 @@
 from typing import List, Optional
 
-from msgspec import Struct
-from typing import TypedDict
+from msgspec import Struct, field
 
 from snek3.types.base import address, hash32, uint, bytesn
-
-transaction_rename = {
-    "sender": "from",  # the culprit
-    "chain_id": "chainId",
-    "max_fee_per_gas": "maxFeePerGas",
-    "max_priority_fee_per_gas": "maxPriorityFeePerGas",
-    "access_list": "accessList",
-    "gas_price": "gasPrice",
-    "block_hash": "blockHash",
-    "block_number": "blockNumber",
-    "transaction_index": "transactionIndex",
-}
 
 
 class AccessListEntry(Struct, rename="camel"):
@@ -26,7 +13,7 @@ class AccessListEntry(Struct, rename="camel"):
 AccessList = List[AccessListEntry]
 
 
-class TransactionBase(Struct, rename=transaction_rename.get):
+class TransactionBase(Struct, rename="camel"):
     # `type` field is omitted since it's used in the tagged union
 
     nonce: uint
@@ -39,7 +26,7 @@ class TransactionBase(Struct, rename=transaction_rename.get):
     # details
     block_hash: hash32
     block_number: uint
-    sender: address
+    sender: address = field(name="from")
     hash: hash32
     transaction_index: uint
 
@@ -65,23 +52,3 @@ class TransactionLegacy(TransactionBase, tag="0x0"):
 
 
 Transaction = Transaction1559 | Transaction2930 | TransactionLegacy
-
-# used as input
-GenericTransaction = TypedDict(
-    "GenericTransaction",
-    {
-        "type": bytesn,
-        "nonce": uint,
-        "to": address,
-        "from": address,
-        "gas": uint,
-        "value": uint,
-        "input": bytesn,
-        "gasPrice": uint,
-        "maxPriorityFeePerGas": uint,
-        "maxFeePerGas": uint,
-        "accessList": AccessList,
-        "chainId": uint,
-    },
-    total=False,
-)

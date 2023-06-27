@@ -8,7 +8,7 @@ from snek3.types.base import bytesn, uint
 from snek3.types.block import BlockExpanded, BlockShort
 from snek3.types.filter import FilterResults
 from snek3.types.receipt import Receipt
-from snek3.types.transaction import GenericTransaction, Transaction
+from snek3.types.transaction import Transaction
 
 
 class Snek3(RPC):
@@ -20,7 +20,7 @@ class Snek3(RPC):
     def block_number(self):
         return self.make_request("eth_blockNumber", [], uint)
 
-    def call(self, tx: GenericTransaction, block="latest"):
+    def call(self, tx, block="latest"):
         return self.make_request("eth_call", [tx, block], bytesn)
 
     @property
