@@ -63,7 +63,7 @@ class Snek3(RPC):
         return self.make_request("eth_getCode", [account, block_id], bytesn)
 
     def get_logs(self, params):
-        return self.make_request("eth_getLogs", params, FilterResults)
+        return self.make_request("eth_getLogs", [params], FilterResults)
 
     def get_storage_at(self, account, slot, block_id="latest"):
         return self.make_request("eth_getStorageAt", [account, slot, block_id], bytesn)
