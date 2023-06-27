@@ -26,7 +26,7 @@ class AccessListEntry(Struct, rename="camel"):
 AccessList = List[AccessListEntry]
 
 
-class TransactionBase(Struct, rename=lambda item: transaction_rename.get(item, item)):
+class TransactionBase(Struct, rename=transaction_rename.get):
     # `type` field is omitted since it's used in the tagged union
 
     nonce: uint

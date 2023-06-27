@@ -31,7 +31,7 @@ receipt_rename = {
 }
 
 
-class Receipt(Struct, rename=lambda item: receipt_rename.get(item, item)):
+class Receipt(Struct, rename=receipt_rename.get):
     transaction_hash: hash32
     transaction_index: uint
     block_hash: hash32
