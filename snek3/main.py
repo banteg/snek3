@@ -40,6 +40,7 @@ class Snek3(RPC):
                 params = [hex(identifier), with_transactions]
             # block tag
             case "pending" | "latest" | "finalized" | "safe" | "earliest":
+                method = "eth_getBlockByNumber"
                 params = [identifier, with_transactions]
             # block hash as str
             case str() as i if re.match(r"0x[0-9a-f]{64}", i):
