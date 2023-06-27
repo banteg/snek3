@@ -1,10 +1,11 @@
 from typing import Any
+
 import httpx
 from msgspec import Raw
-from msgspec.json import Decoder
+from msgspec.json import decode
 
-from snek3.hooks import dec_hook
 from snek3.exceptions import RPCError
+from snek3.hooks import dec_hook
 from snek3.types.rpc import Response
 
 
@@ -16,7 +17,7 @@ class RPC:
     def raw_request(self, method, params) -> Raw:
         payload = {"method": method, "params": params, "jsonrpc": "2.0", "id": None}
         resp = self.client.post(self.uri, json=payload)
-        data = Decoder(Response).decode(resp.content)
+        data = decode(resp.content, type=Response)
         if data.error:
             raise RPCError(data.error.message)
 
@@ -24,4 +25,4 @@ class RPC:
 
     def make_request(self, method, params, response_type=Any):
         result = self.raw_request(method, params)
-        return Decoder(response_type, dec_hook=dec_hook).decode(result)
+        return decode(result, type=response_type, dec_hook=dec_hook)

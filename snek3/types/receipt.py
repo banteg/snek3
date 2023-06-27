@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 
 from msgspec import Struct
 
@@ -6,15 +6,15 @@ from snek3.types.base import address, bytes256, bytes32, hash32, uint, bytesn
 
 
 class Log(Struct, rename="camel"):
-    removed: Optional[bool]
-    log_index: Optional[uint]
-    transaction_index: Optional[uint]
+    removed: bool | None
+    log_index: uint | None
+    transaction_index: uint | None
     transaction_hash: hash32
-    block_hash: Optional[hash32]
-    block_number: Optional[uint]
-    address: Optional[address]
-    data: Optional[bytesn]
-    topics: Optional[List[bytes32]]
+    block_hash: hash32 | None
+    block_number: uint | None
+    address: address | None
+    data: bytesn | None
+    topics: List[bytes32] | None
 
 
 receipt_rename = {

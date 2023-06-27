@@ -1,6 +1,4 @@
-from __future__ import annotations
-
-from typing import List, Optional
+from typing import List
 
 from msgspec import Struct
 
@@ -13,7 +11,7 @@ FilterTopics = List[bytes32 | List[bytes32] | None]
 
 
 class Filter(Struct, rename="camel"):
-    from_block: Optional[uint]
-    to_block: Optional[uint]
-    address: address | List[address]
-    topics: Optional[FilterTopics]
+    from_block: uint | None
+    to_block: uint | None
+    address: address | list[address]  # invalid in msgspec
+    topics: FilterTopics | None
