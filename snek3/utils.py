@@ -18,7 +18,7 @@ def encode_block_id(value):
             return value
         case int() as i if i >= 0:
             return hex(value)
-        case bytes():
+        case bytes() as v if len(v) == 32:
             return encode_hex(value)
         case str() as v if re.match(r"0x[0-9a-f]{1,64}", v):
             return value
