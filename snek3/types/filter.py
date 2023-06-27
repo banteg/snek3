@@ -15,5 +15,5 @@ FilterTopics = List[bytes32 | List[bytes32] | None]
 class Filter(Struct, rename="camel"):
     from_block: Optional[uint]
     to_block: Optional[uint]
-    address = address | List[address]
+    address: address | List[address]
     topics: Optional[FilterTopics]
