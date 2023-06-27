@@ -64,3 +64,7 @@ class Snek3(RPC):
     @property
     def client_version(self):
         return self.make_request("web3_clientVersion", [])
+
+    @property
+    def syncing(self):
+        return self.make_request("eth_syncing", [])
