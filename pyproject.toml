@@ -11,6 +11,7 @@ msgspec = ">=0.16.0"
 eth-utils = ">=2.1.1"
 pysha3 = ">=1.0.2"
 httpx = ">=0.24.1"
+hexbytes = "^0.3.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.4.0"
