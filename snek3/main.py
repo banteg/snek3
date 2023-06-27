@@ -6,8 +6,7 @@ from hexbytes import HexBytes
 from snek3.rpc import RPC
 from snek3.types.base import bytesn, uint
 from snek3.types.block import BlockExpanded, BlockShort
-from snek3.types.filter import FilterResults
-from snek3.types.receipt import Receipt
+from snek3.types.receipt import Log, Receipt
 from snek3.types.transaction import Transaction
 
 
@@ -63,7 +62,7 @@ class Snek3(RPC):
         return self.make_request("eth_getCode", [account, block_id], bytesn)
 
     def get_logs(self, params):
-        return self.make_request("eth_getLogs", [params], FilterResults)
+        return self.make_request("eth_getLogs", [params], list[Log])
 
     def get_storage_at(self, account, slot, block_id="latest"):
         return self.make_request("eth_getStorageAt", [account, slot, block_id], bytesn)
