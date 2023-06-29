@@ -1,4 +1,4 @@
-from typing import List, Literal
+from typing import Literal
 
 from msgspec import Struct
 
@@ -22,15 +22,15 @@ class Block(Struct, rename="camel"):
     mix_hash: hash32
     nonce: bytes8
     size: uint
-    uncles: List[hash32]
+    uncles: list[hash32]
 
 
 class BlockShort(Block):
-    transactions: List[hash32]
+    transactions: list[hash32]
 
 
 class BlockExpanded(Block):
-    transactions: List[Transaction]
+    transactions: list[Transaction]
 
 
 BlockTag = Literal["earliest", "finalized", "safe", "latest", "pending"]

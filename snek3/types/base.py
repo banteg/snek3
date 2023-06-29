@@ -1,6 +1,3 @@
-from hexbytes import HexBytes
-
-
 class address(str):
     pass
 
