@@ -13,3 +13,6 @@ s = Snek3()
 block = s.get_block('latest', True)
 rich.print(block)
 ```
+
+### Continued Development
+The Struct definitions from snek3 have been adopted and extended in the [evmspec](https://github.com/BobTheBuidler/evmspec) library
